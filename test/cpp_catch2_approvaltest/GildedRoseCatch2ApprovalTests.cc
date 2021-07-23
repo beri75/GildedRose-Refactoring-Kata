@@ -5,9 +5,9 @@
 std::ostream& operator<<(std::ostream& os, const Item& obj)
 {
     return os
-        << "name: " << obj.name
-        << ", sellIn: " << obj.sellIn
-        << ", quality: " << obj.quality;
+        << "name: " << obj.GetName()
+        << ", sellIn: " << obj.GetSellIn()
+        << ", quality: " << obj.GetQuality();
 }
 
 TEST_CASE("GildedRoseApprovalTests", "VerifyCombinations")

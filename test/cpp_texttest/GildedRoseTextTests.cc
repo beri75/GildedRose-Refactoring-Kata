@@ -4,7 +4,7 @@
 int
 print_item(Item *item)
 {
-    return printf("%s, %d, %d\n", item->name.c_str(), item->sellIn, item->quality);
+    return printf("%s, %d, %d\n", item->GetName().c_str(), item->GetSellIn(), item->GetQuality());
 }
 
 int main()

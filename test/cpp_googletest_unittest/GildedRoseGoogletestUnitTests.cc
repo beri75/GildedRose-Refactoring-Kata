@@ -9,9 +9,9 @@ TEST(GildedRoseTest, con10GiorniRestanti_laNuovaQualitaDelFormaggioDiventa) {
     GildedRose app(items);
     app.updateQuality();
 
-    EXPECT_EQ("Aged Brie", app.items[0]->name);
-    EXPECT_EQ(9, app.items[0]->sellIn);
-    EXPECT_EQ(11, app.items[0]->quality);
+    EXPECT_EQ("Aged Brie", app.items[0]->GetName());
+    EXPECT_EQ(9, app.items[0]->GetSellIn());
+    EXPECT_EQ(11, app.items[0]->GetQuality());
 }
 
 TEST(GildedRoseTest, con9Restanti_laNuovaQualitaDelFormaggioDiventa) {
@@ -22,8 +22,8 @@ TEST(GildedRoseTest, con9Restanti_laNuovaQualitaDelFormaggioDiventa) {
     GildedRose app(items);
     app.updateQuality();
 
-    EXPECT_EQ(8, app.items[0]->sellIn);
-    EXPECT_EQ(11, app.items[0]->quality);
+    EXPECT_EQ(8, app.items[0]->GetSellIn());
+    EXPECT_EQ(11, app.items[0]->GetQuality());
 }
 
 TEST(GildedRoseTest, raggiuntaLaScadenza_laQualitaDegradaIlDoppio) {
@@ -34,8 +34,8 @@ TEST(GildedRoseTest, raggiuntaLaScadenza_laQualitaDegradaIlDoppio) {
     GildedRose app(items);
     app.updateQuality();   
     
-    EXPECT_EQ(-1, app.items[0]->sellIn);
-    EXPECT_EQ(8, app.items[0]->quality);
+    EXPECT_EQ(-1, app.items[0]->GetSellIn());
+    EXPECT_EQ(8, app.items[0]->GetQuality());
 }
 
 TEST(GildedRoseTest, raggiuntaLaScadenza_laQualitaNonEMaiNegativa) {
@@ -46,8 +46,8 @@ TEST(GildedRoseTest, raggiuntaLaScadenza_laQualitaNonEMaiNegativa) {
     GildedRose app(items);
     app.updateQuality();
 
-    EXPECT_EQ(-1, app.items[0]->sellIn); //!!! ouch
-    EXPECT_EQ(0, app.items[0]->quality);
+    EXPECT_EQ(-1, app.items[0]->GetSellIn()); //!!! ouch
+    EXPECT_EQ(0, app.items[0]->GetQuality());
 }
 
 TEST(GildedRoseTest, trascorsoUnGiorno_laQualitaDelBrieAumenta) {
@@ -58,8 +58,8 @@ TEST(GildedRoseTest, trascorsoUnGiorno_laQualitaDelBrieAumenta) {
     GildedRose app(items);
     app.updateQuality();
 
-    EXPECT_EQ(11, app.items[0]->quality);
-    EXPECT_EQ(4, app.items[0]->sellIn);
+    EXPECT_EQ(11, app.items[0]->GetQuality());
+    EXPECT_EQ(4, app.items[0]->GetSellIn());
 }
 
 TEST(GildedRoseTest, raggiuntaLaQualitaMassima_trascorsoUnGiorno_laQualitaRestaInvariata) {
@@ -70,8 +70,8 @@ TEST(GildedRoseTest, raggiuntaLaQualitaMassima_trascorsoUnGiorno_laQualitaRestaI
     GildedRose app(items);
     app.updateQuality();
 
-    EXPECT_EQ(50, app.items[0]->quality);
-    EXPECT_EQ(4, app.items[0]->sellIn);
+    EXPECT_EQ(50, app.items[0]->GetQuality());
+    EXPECT_EQ(4, app.items[0]->GetSellIn());
 }
 
 TEST(GildedRoseTest, Sulfuras_raggintaLaQualitaMassima_trascorsoUnGiorno_laQualitaRestaInvariata) {
@@ -82,8 +82,8 @@ TEST(GildedRoseTest, Sulfuras_raggintaLaQualitaMassima_trascorsoUnGiorno_laQuali
     GildedRose app(items);
     app.updateQuality();
 
-    EXPECT_EQ(5, app.items[0]->sellIn);
-    EXPECT_EQ(80, app.items[0]->quality);
+    EXPECT_EQ(5, app.items[0]->GetSellIn());
+    EXPECT_EQ(80, app.items[0]->GetQuality());
 }
 
 TEST(GildedRoseTest, Backstage_raggintaLaQualitaMassima_trascorsoUnGiorno_laQualitaRestaInvariata) {
@@ -96,13 +96,13 @@ TEST(GildedRoseTest, Backstage_raggintaLaQualitaMassima_trascorsoUnGiorno_laQual
     GildedRose app(items);
     app.updateQuality();
     
-    EXPECT_EQ(11, app.items[0]->quality);    
-    EXPECT_EQ(12, app.items[1]->quality);
-    EXPECT_EQ(13, app.items[2]->quality);
+    EXPECT_EQ(11, app.items[0]->GetQuality());    
+    EXPECT_EQ(12, app.items[1]->GetQuality());
+    EXPECT_EQ(13, app.items[2]->GetQuality());
 
-    EXPECT_EQ(10, app.items[0]->sellIn);
-    EXPECT_EQ(9, app.items[1]->sellIn);
-    EXPECT_EQ(4, app.items[2]->sellIn);
+    EXPECT_EQ(10, app.items[0]->GetSellIn());
+    EXPECT_EQ(9, app.items[1]->GetSellIn());
+    EXPECT_EQ(4, app.items[2]->GetSellIn());
 }
 
 TEST(GildedRoseTest, sellInRimastoZero_QualitaItemGenericoDecrementaDiDue) 
@@ -113,8 +113,8 @@ TEST(GildedRoseTest, sellInRimastoZero_QualitaItemGenericoDecrementaDiDue)
     GildedRose app(items);
     app.updateQuality();
 
-    EXPECT_EQ(8, app.items[0]->quality);
-    EXPECT_EQ(-1, app.items[0]->sellIn);
+    EXPECT_EQ(8, app.items[0]->GetQuality());
+    EXPECT_EQ(-1, app.items[0]->GetSellIn());
 }
 
 TEST(GildedRoseTest, sellInRimastoZero_QualitaBrieAumentaSellInScende)
@@ -125,8 +125,8 @@ TEST(GildedRoseTest, sellInRimastoZero_QualitaBrieAumentaSellInScende)
     GildedRose app(items);
     app.updateQuality();
 
-    EXPECT_EQ(11, app.items[0]->quality);
-    EXPECT_EQ(-1, app.items[0]->sellIn);
+    EXPECT_EQ(11, app.items[0]->GetQuality());
+    EXPECT_EQ(-1, app.items[0]->GetSellIn());
 }
 
 TEST(GildedRoseTest, sellInRimastoZero_QualitaBackstageAumentaSellInScende)
@@ -137,8 +137,8 @@ TEST(GildedRoseTest, sellInRimastoZero_QualitaBackstageAumentaSellInScende)
     GildedRose app(items);
     app.updateQuality();
 
-    EXPECT_EQ(0, app.items[0]->quality);
-    EXPECT_EQ(-1, app.items[0]->sellIn);
+    EXPECT_EQ(0, app.items[0]->GetQuality());
+    EXPECT_EQ(-1, app.items[0]->GetSellIn());
 }
 
 TEST(GildedRoseTest, sellInRimastoZero_QualitaSulfuras80SellInRimaneInvariato)
@@ -149,6 +149,18 @@ TEST(GildedRoseTest, sellInRimastoZero_QualitaSulfuras80SellInRimaneInvariato)
     GildedRose app(items);
     app.updateQuality();
 
-    EXPECT_EQ(80, app.items[0]->quality);
-    EXPECT_EQ(0, app.items[0]->sellIn);
+    EXPECT_EQ(80, app.items[0]->GetQuality());
+    EXPECT_EQ(0, app.items[0]->GetSellIn());
+}
+
+TEST(GildedRoseTest, passaUnGiorno_ConjuredDegradaDiQualitaIlDoppio)
+{
+    vector<itemPtr> items;
+    items.push_back(make_shared<Conjured>(10, 10));
+
+    GildedRose app(items);
+    app.updateQuality();
+
+    EXPECT_EQ(8, app.items[0]->GetQuality());
+    EXPECT_EQ(9, app.items[0]->GetSellIn());
 }
