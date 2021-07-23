@@ -37,6 +37,10 @@ public:
     virtual void update() 
     {
         decreaseQuality();
+        decreaseSellIn();
+
+        if (sellIn < 0)
+            decreaseQuality();
     }
 };
 
@@ -47,6 +51,7 @@ public:
     void update() override
     {
         increaseQuality();
+        decreaseSellIn();
     }
 };
 
@@ -57,8 +62,27 @@ public:
     void update() override
     {
         increaseQuality();
-        if (sellIn < 11) increaseQuality();
-        if (sellIn < 6) increaseQuality();
+        
+        if (sellIn > 0)
+        {
+            if (sellIn < 11) 
+                increaseQuality();
+            if (sellIn < 6) 
+                increaseQuality();
+        }
+        else
+            resetQuality();
+
+        decreaseSellIn();
+    }
+};
+
+class Sulfuras : public Item
+{
+public:
+    Sulfuras(int sellIn) : Item(_sulfurName, sellIn, 80) {}
+    void update() override
+    {
     }
 };
 
@@ -72,7 +96,5 @@ public:
     GildedRose(vector<Item>& _items);
     
     void updateQuality();    
-    void handleBackStage(Item& item);    
-    void decreaseSellIn(Item& item);
 };
 
